@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danil Teteruk - official site</title>
+    <meta charset="utf-8"> 
+    <style>
+        html, body {
+          padding: 0; 
+          margin: 0; 
+          font-size: 20px;
+          font-family: Arial, Helvetica, sans-serif;
+          color: #060606;
+        }
+        a {
+            color: black;
+            margin-right: 30px;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+       header {
+        height: 100px;
+       }
+       .fixed-countainer {
+        max-width: 1200px;
+        margin: 0 auto 0 auto;
+        height: 100%;
+       }
+       header > div {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin: 0 300px 0 300px;
+       }
+       .light-button {
+        background-color: transparent;
+        border: 1px solid black;
+       }
+       .dark-button {
+        border: 1px solid #3b53fe;
+        color: white;
+        background-color: #3b53fe;
+       }
+       button{
+        font-size: 14px;
+        padding: 15px 40px;
+        border-radius: 10px;
+        cursor: pointer;
+       }
+       .first-block > div {
+        height: 500px;
+        background-image: url(/img/man.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center right;
+        display: flex;
+        flex-direction:column;
+        align-items: flex-start;
+        justify-content: center;
+        }
+       h1{
+        font-size: 60px;
+        margin: 0 0 20px 0;
+       }
+       h2{
+        font-size: 40px;
+       }
+       .subtitle{
+        margin: 0 0 30px 0;
+       }
+       .services{
+        display: flex;
+        justify-content: space-between;
+        height: 240px;
+        margin: 60px 0;
+       }
+       .services > div {
+        width: 210px;
+        width: 210px;
+        font-size: 16px;
+       }
+       .services img {
+        width: 175px;
+        width: 175px;
+        margin-bottom: 20px;
+       }
+       .layout-container{
+        position: fixed;
+        background-color: #0000009e;
+        height: 100%;
+        width:100% ;
+        display: none;
+        align-items: center;
+        justify-content: center;
+       }
+
+       .layout{
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        width: 400px;
+       }
+       .layout input {
+        font-size: 24px;
+        width: 100%;
+        margin-bottom: 25px;
+       }
+       .layout h2 {
+        font-size: 30px;
+        margin: 0 0 30px 0;
+       }
+       .orders{
+        display: flex;
+        justify-content: space-between;
+        height: 300px;
+        margin: 60px 0;
+       }
+       .orders > div {
+        width: 210px;
+        width: 210px;
+        font-size: 14px;
+       }
+       .orders img {
+        width: 500px;
+        width: 350px;
+        margin-bottom: 20px;
+       }
+       .offer {
+        display:flex;
+        flex-direction:column;
+        justify-content: flex-end;
+        padding: 60px 0 60px 0;
+        height: 350px;
+        margin: 60px 0 0 0;
+        background-color: #3b53fe;
+       }
+       .offer-content {
+        width: 900px;
+        }
+       .offer > h1 {
+        color: white;
+        margin: 0 0 60px 290px;
+        max-width: 50%;
+        font-size: 55px;
+       }
+       .offer > p {
+        color: white;
+        margin: 0 0 60px 290px;
+        max-width: 50%;
+        font-size: 16px;
+       }
+       .lower {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         margin: 0 300px 0 300px;
+         height: 300px;
+       }
+       .lower-menu {
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+       }
+       .social-midea button {
+         margin-bottom: 50px;
+        }
+       .social-midea img {
+         height: 20px;
+         width: 20px;
+       }
+       .contacts{
+         margin-top: -40px;
+       }
+    </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                let layoutContainer = $('.layout-container');
+                 $('button').on('click', function (){
+                   layoutContainer.css('display', 'flex');
+                 });
+
+                 layoutContainer.on('click', function(e){
+                    if(this === e.target) {
+                       layoutContainer.css('display', 'none'); 
+                    }
+                 });
+
+                 $('.layout button').on('click', function (){
+                    let request = {
+                        'name': $('.layout input[name="name"]').val(),
+                        'email': $('.layout input[name="email"]').val()
+                    };
+                    $.post('/api.php', request, function(response){
+                        if(response == '1') {
+                             layoutContainer.css('display', 'none'); 
+                        } else {
+                            alert('Something went wrong :(');
+                        }
+                    });
+                 });
+            });
+        </script>
+</head>
+        <body>
+            <div class="layout-container">
+            <div class="layout"> 
+            <h2>Send a request</h2>
+                <input type="text" name="name" placeholder="Your name">
+                <input type="email" name="email" placeholder="E-mail">  
+            <button class="light-button ">Sent</button>
+            </div>
+            </div>
+            <header>
+                <div class="fixed-container">
+                    <nav> 
+                    <a href="#">Services</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">Price</a>
+                    </nav>
+                    <div>
+                    +1 (101) 777-8888 
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="light-button">Call back</button>  
+                    </div>
+                </div>
+            </header>
+            <section class="first-block">
+                <div class="fixed-countainer">
+                    <h1>Daniil Teteruk</h1>
+                    <p class="subtitle">Frontend developer and web designer</p>
+                    <button class="dark-button">Find out more</button>
+
+                </div>
+            </section>
+            <section class="second-block"> 
+                <div class="fixed-countainer">
+                <h2>What am I doing</h2>
+               <div class="services">
+                    <div>
+                        <img src="/img/1.png"> 
+                        Layout of landing pages and websites of any complexity
+                    </div>
+                    <div>
+                        <img src="/img/2.png"> 
+                        Adaptive layout for all browsers and devices
+                    </div>
+                    <div>
+                        <img src="/img/3.png"> 
+                        Frontend development and programming
+                    </div>
+                    <div>
+                        <img src="/img/4.png"> 
+                        Correction and revision of the existing layout
+                    </div>
+                </div>
+                <button class="light-button">Find out the cost</button>
+                </div>
+            </section>
+            <section class="third-block"> 
+                <div class="fixed-countainer">
+                <h2>Examples of work</h2>
+               <div class="orders">
+                    <div>
+                        <img src="/img/e1.png"> 
+                        Website of psychologist Vera Antonova
+                    </div>
+                    <div>
+                        <img src="/img/e2.png"> 
+                        Children's clothing store website
+                    </div>
+                    <div>
+                        <img src="/img/e3.png"> 
+                       The website of the shop "Fisherman"
+                    </div>
+                </div>
+                <button class="light-button">Order a project</button>
+                </div>
+            </section>
+            <section class="fours-block"> 
+                <div class="countainer">
+                <div class="offer">
+                    <h1>Adaptive layout for all devices and browsers from 100 $ in just 4 hours.*</h1>
+                    <p>* The term and cost may differ from those stated and are calculated 
+                    individually depending on the complexity of the tasks.</p>
+                </div>
+                </div>
+            </section>
+            <section class="fives-block"> 
+                <div class="countainer">
+                <div class="lower">
+                    <nav class="lower-menu"> 
+                    <a href="#">Services</a>
+                    <a href="#">Portfolio</a>
+                    <a href="#">Price</a>
+                    </nav>
+                    <div class="contacts"> 
+                        <p>teteruk.daniil@icloud.com</p>
+                        <p>+1 793 278 9857</p>
+                    </div>
+                    <div class="social-midea"> 
+                        <button class="light-button ">Call back</button> 
+                        <nav class="lower-menu-social-media"> 
+                    <a href="#"><img src="/img/fb.png"></a>
+                    <a href="#"><img src="/img/inst.png"></a>
+                    <a href="#"><img src="/img/telegram.png"></a>
+                    <a href="#"><img src="/img/vk.png"></a>
+                    <a href="#"><img src="/img/you.png"></a>
+                    </nav>
+                    </div>
+                </div>
+                </div>
+            </section>
+        </body>
+
+</html>
+
+
+
+
+
